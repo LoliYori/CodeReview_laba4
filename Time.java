@@ -31,13 +31,20 @@ public class Time {
 
     // Сеттер для общего количества секунд с начала суток — с нормализацией и защитой от отрицательных значений
     public void setSeconds(int seconds) {
+        if (seconds < 0) {
+            System.out.println("Ошибка: отрицательное количество секунд не допускается. Установлено 0.");
+            this.seconds = 0;
+            return;
+        }
         this.seconds = Math.floorMod(seconds, 86400);
     }
 
-    // Сеттер для времени по компонентам — с базовой валидацией
+    // Сеттер для времени по компонентам — с базовой валидацией без исключений
     public void setTime(int hours, int minutes, int seconds) {
         if (hours < 0 || minutes < 0 || seconds < 0) {
-            throw new IllegalArgumentException("Отрицательное время не допускается.");
+            System.out.println("Ошибка: отрицательное время не допускается. Установлено 00:00:00.");
+            this.seconds = 0;
+            return;
         }
         int totalSeconds = hours * 3600 + minutes * 60 + seconds;
         this.seconds = Math.floorMod(totalSeconds, 86400);
