@@ -12,9 +12,11 @@ public class Department {
     // Конструктор открыт — делает явным, что им можно пользоваться извне
     public Department(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Название отдела не может быть пустым");
+            System.out.println("Ошибка: название отдела не может быть пустым. Название установлено как 'Без имени'.");
+            this.name = "Безымянный";
+        } else {
+            this.name = name;
         }
-        this.name = name;
         this.employees = new ArrayList<>();
     }
 
